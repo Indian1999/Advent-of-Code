@@ -1,0 +1,11 @@
+# Ignore all executable files
+*.exe
+*.out
+*.bin
+*.app
+*.sh
+
+# Ignore all files starting with a dot (hidden files)
+.*
+
+!.gitignore
