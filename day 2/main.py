@@ -15,7 +15,7 @@ def is_safe(report:list[int], joker:bool = True) -> bool:
     def error(i):
         if joker:
             safe_without_first = is_safe(report[1:], False)
-            return safe_without_first or is_safe(report[:i] + report[i+1:], False)
+            return safe_without_first or is_safe(report[:i] + report[i+1:], False) or is_safe(report[:i-1] + report[i:], False)
         return False
     increasing = False
     if report[0] < report[1]:
@@ -38,20 +38,11 @@ with open("day 2/input.txt", "r", encoding="utf-8") as f:
         report = [int(item) for item in split_line]
         reports.append(report)
 
-"""
-reports = [
-    [7, 6, 4, 2, 1],
-    [1, 2, 7, 8, 9], 
-    [9, 7, 6, 2, 1], 
-    [1, 3, 2, 4, 5], 
-    [8, 6, 4, 4, 1], 
-    [1, 3, 6, 7, 9]
-]"""
 counter = 0
 for report in reports:
     if is_safe(report):
         counter += 1
 
 #part1: 220
-#part2: INCORRECT 295
+#part2: 296
 print(counter)

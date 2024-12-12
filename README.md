@@ -3,6 +3,10 @@ Advent of Code 2024 journal
 Day 1:
 Not much to say, was an easy routine task.
 
+Day 2:
+First task was pretty straight forward, but things got a little complecated in the second. My initial idea did not take into account when the first level is wrong, but even after fixing this there was one scenario where a report was misslabeled, took me a while to figure it out, turn out sometimes the wrong level is the one that is before the currently checked one.
+The solution itself is not the best, probably not the best runtime.
+
 Day 10:
 This was a nice challange, needed to think it through to get a fairly easy solution, altough it helped that I accidentally solved part2 while trying to solve part1 :D
 
