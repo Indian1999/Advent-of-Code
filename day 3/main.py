@@ -43,15 +43,38 @@ def handle_dos_and_donts_2(instruction:str)->str:
         if enabled:
             handled_instruction += instruction[i]
     return handled_instruction
+
+def string_clean_up(instruction:str)->str:
+    """Abandon this, it changes the result"""
+    valid_chars = "mul(),don't0123456789"
+    cleaned_string = ""
+    for char in instruction:
+        if char in valid_chars:
+            cleaned_string += char
+    return cleaned_string
+    
+def handle_dos_and_donts_3(instruction:str)->str:
+    ins_split = instruction.split("don't")
+    handled_instruction = ""
+    handled_instruction += ins_split[0]
+    for i in range(1, len(ins_split)):
+        if "do()" in ins_split[i]:
+            do_index = ins_split[i].find("do()")
+            handled_instruction += ins_split[i][do_index+4:]
+    return handled_instruction
 instruction = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undon't()do()()?mul(8,5))"
 with open("day 3/input.txt", "r", encoding="utf-8") as f:
     lines = f.readlines()
     for line in lines:
         instruction = instruction + line
+
 #print(instruction)
-instruction = handle_dos_and_donts_2(instruction)
+instruction = handle_dos_and_donts_3(instruction)
 #print(instruction)
 print(parse_instruction(instruction))
 
-#part2: (with handle_dos_and_donts) 83276487 INCORRECT (too high)
-#part2: (with handle_dos_and_donts_2) 82733731 INCORRECT (too high)
+#part2: (with handle_dos_and_donts)               83276487 INCORRECT (too high)
+#part2: (with handle_dos_and_donts_2)             82733731 INCORRECT (too high)
+#part2: (with handle_dos_and_donts_2 and cleanup) 82911076 INCORRECT (too high)
+#part2: (with handle_dos_and_donts and cleanup)   83453832 INCORRECT (too high)
+#part2: (handle_dos_and_donts_3 results the same as the 2)
