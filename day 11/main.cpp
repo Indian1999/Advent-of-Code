@@ -4,22 +4,23 @@
 #include <cmath>
 #include <unordered_map>
 #include <functional>
+#include <stdint.h>
 using namespace std;
 namespace std
 {
     template <>
-    struct hash<pair<unsigned long long int, int>>
+    struct hash<pair<uint64_t, int>>
     {
-        size_t operator()(const pair<unsigned long long int, int> &pair) const
+        size_t operator()(const pair<uint64_t, int> &pair) const
         {
-            auto hash1 = hash<unsigned long long int>()(pair.first);
+            auto hash1 = hash<uint64_t>()(pair.first);
             auto hash2 = hash<int>()(pair.second);
             return hash1 ^ (hash2 << 1);
         }
     };
 }
-unordered_map<pair<unsigned long long int, int>, int> memo;
-int num_length(unsigned long long int num)
+unordered_map<pair<uint64_t, int>, uint64_t> memo;
+int num_length(uint64_t num)
 {
     int len = 0;
     while (num > 0)
@@ -30,9 +31,9 @@ int num_length(unsigned long long int num)
     return len;
 }
 
-int stone_value(unsigned long long int num, int n)
+uint64_t stone_value(uint64_t num, int n)
 {
-    pair<unsigned long long int, int> num_n = {num,n};
+    pair<uint64_t, int> num_n = {num,n};
     if (memo.find(num_n) != memo.end())
     {
         return memo[num_n];
@@ -54,8 +55,8 @@ int stone_value(unsigned long long int num, int n)
             {
                 divisor *= 10;
             }
-            unsigned long long int first_half = floor(num / divisor);
-            unsigned long long int second_half = num % divisor;
+            uint64_t first_half = floor(num / divisor);
+            uint64_t second_half = num % divisor;
             // cout << num << " / " << divisor << " " << first_half << " " << second_half << endl;
             return memo[num_n] = stone_value(first_half, n - 1) + stone_value(second_half, n - 1);
         }
@@ -67,8 +68,8 @@ int stone_value(unsigned long long int num, int n)
 }
 int main()
 {
-    vector<unsigned long long int> stones = {3935565, 31753, 437818, 7697, 5, 38, 0, 123};
-    int total = 0;
+    vector<uint64_t> stones = {3935565, 31753, 437818, 7697, 5, 38, 0, 123};
+    uint64_t total = 0;
     int blinks = 75;
     for (int i = 0; i < stones.size(); i++)
     {
