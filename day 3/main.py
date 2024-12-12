@@ -12,9 +12,46 @@ def parse_instruction(instruction: str):
         else:
             return 0
         
-instruction = ""
+def handle_dos_and_donts(instruction: str) -> str:
+    dont_index = instruction.find("don't()")
+    do_index = instruction[dont_index:].find("do()") + dont_index
+    if dont_index == -1:
+        return instruction
+    if do_index == -1:
+        return instruction[:dont_index]
+    return instruction[:dont_index] + handle_dos_and_donts(instruction[do_index+4:])
+
+def handle_dos_and_donts_2(instruction:str)->str:
+    handled_instruction = ""
+    enabled = True
+    for i in range(len(instruction)):
+        if instruction[i] == "d":
+            if i + 1 < len(instruction) and instruction[i+1] == "o":
+                if i + 2 < len(instruction) and instruction[i+2] == "(":
+                    if i + 3 < len(instruction) and instruction[i+3] == ")":
+                        enabled = True
+                        continue
+        if instruction[i] == "d":
+            if i + 1 < len(instruction) and instruction[i+1] == "o":
+                if i + 2 < len(instruction) and instruction[i+2] == "n":
+                    if i + 3 < len(instruction) and instruction[i+3] == "'":
+                        if i + 4 < len(instruction) and instruction[i+4] == "t":
+                            if i + 5 < len(instruction) and instruction[i+5] == "(":
+                                if i + 6 < len(instruction) and instruction[i+6] == ")":
+                                    enabled = False
+                                    continue
+        if enabled:
+            handled_instruction += instruction[i]
+    return handled_instruction
+instruction = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undon't()do()()?mul(8,5))"
 with open("day 3/input.txt", "r", encoding="utf-8") as f:
     lines = f.readlines()
     for line in lines:
         instruction = instruction + line
+#print(instruction)
+instruction = handle_dos_and_donts_2(instruction)
+#print(instruction)
 print(parse_instruction(instruction))
+
+#part2: (with handle_dos_and_donts) 83276487 INCORRECT (too high)
+#part2: (with handle_dos_and_donts_2) 82733731 INCORRECT (too high)
