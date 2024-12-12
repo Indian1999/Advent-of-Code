@@ -57,7 +57,6 @@ uint64_t stone_value(uint64_t num, int n)
             }
             uint64_t first_half = floor(num / divisor);
             uint64_t second_half = num % divisor;
-            // cout << num << " / " << divisor << " " << first_half << " " << second_half << endl;
             return memo[num_n] = stone_value(first_half, n - 1) + stone_value(second_half, n - 1);
         }
         else
