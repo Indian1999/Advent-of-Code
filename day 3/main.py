@@ -78,3 +78,9 @@ print(parse_instruction(instruction))
 #part2: (with handle_dos_and_donts_2 and cleanup) 82911076 INCORRECT (too high)
 #part2: (with handle_dos_and_donts and cleanup)   83453832 INCORRECT (too high)
 #part2: (handle_dos_and_donts_3 results the same as the 2)
+
+"""
+Idea for tomorrow:
+insert a do() at the start and a don't() at the end
+maybe something comes of it
+"""
