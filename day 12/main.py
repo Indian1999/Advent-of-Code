@@ -19,7 +19,9 @@ def collapse_section(matrix, i,j, value):
     if matrix[i][j] != value:
         return (0,0)
     matrix[i][j] = "-"
-    return MyTuple((1,cell_perimeter(i,j))) + collapse_section(matrix, i, j-1, value) + collapse_section(matrix, i, j + 1, value) + collapse_section(matrix, i-1, j, value) + collapse_section(matrix, i+1, j, value)
+    #perimeter = cell_perimeter((i,j)) # PART 1
+    perimeter = cell_sides(i,j) # PART 2
+    return MyTuple((1,perimeter)) + collapse_section(matrix, i, j-1, value) + collapse_section(matrix, i, j + 1, value) + collapse_section(matrix, i-1, j, value) + collapse_section(matrix, i+1, j, value)
 
 def cell_perimeter(i, j):
     global mtx
@@ -32,6 +34,37 @@ def cell_perimeter(i, j):
             return 0
     perim = check_cell_value(i-1,j,mtx[i][j]) + check_cell_value(i+1,j,mtx[i][j]) + check_cell_value(i,j+1,mtx[i][j]) + check_cell_value(i,j-1,mtx[i][j])
     return perim
+
+def cell_sides(i,j):
+    global mtx
+    def check_cell_value(i,j, value):
+        if i >= len(mtx) or i < 0 or j >= len(mtx[i]) or j < 0:
+            return 1
+        if mtx[i][j] != value:
+            return 1
+        else:
+            return 0
+    sides = check_cell_value(i-1,j,mtx[i][j]) + check_cell_value(i,j+1,mtx[i][j])
+    sides = 0
+    # Outer corners
+    if check_cell_value(i-1,j,mtx[i][j]) + check_cell_value(i,j+1,mtx[i][j]) == 2:
+        sides += 1
+    if check_cell_value(i-1,j,mtx[i][j]) + check_cell_value(i,j-1,mtx[i][j]) == 2:
+        sides += 1
+    if check_cell_value(i+1,j,mtx[i][j]) + check_cell_value(i,j+1,mtx[i][j]) == 2:
+        sides += 1
+    if check_cell_value(i+1,j,mtx[i][j]) + check_cell_value(i,j-1,mtx[i][j]) == 2:
+        sides += 1
+    # Inner corners
+    if check_cell_value(i+1,j,mtx[i][j]) == 0 and check_cell_value(i,j+1,mtx[i][j]) == 0 and check_cell_value(i+1,j+1,mtx[i][j]) == 1:
+        sides += 1
+    if check_cell_value(i-1,j,mtx[i][j]) == 0 and check_cell_value(i,j+1,mtx[i][j]) == 0 and check_cell_value(i-1,j+1,mtx[i][j]) == 1:
+        sides += 1
+    if check_cell_value(i-1,j,mtx[i][j]) == 0 and check_cell_value(i,j-1,mtx[i][j]) == 0 and check_cell_value(i-1,j-1,mtx[i][j]) == 1:
+        sides += 1
+    if check_cell_value(i+1,j,mtx[i][j]) == 0 and check_cell_value(i,j-1,mtx[i][j]) == 0 and check_cell_value(i+1,j-1,mtx[i][j]) == 1:
+        sides += 1
+    return sides
 
 def calculate_price(areas):
     total = 0
@@ -66,3 +99,4 @@ print(calculate_price(determine_areas(mtx_copy)))
 
 #part 1: 1490296 INCORRECT (too high) (There was a \n at the end of lines) + 140 * 282 (\n area and perim)
 #part 1: 1450816 CORRECT
+#part 2: 865662 CORRECT
