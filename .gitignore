@@ -8,4 +8,8 @@
 # Ignore all files starting with a dot (hidden files)
 .*
 
+# Ignore png files
+
+*.png
+
 !.gitignore

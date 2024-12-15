@@ -56,7 +56,7 @@ def count_robots(robots):
             q3 += 1
         if robot[0] < width // 2 and robot[1] > height // 2:
             q4 += 1
-    print(q1,q2,q3,q4)
+    #print(q1,q2,q3,q4)
     return q1*q2*q3*q4
 
 def robot_matrix(robots):
@@ -81,18 +81,48 @@ def plot_robots(robots, sec_range=(1, 26)):
     plt.savefig(f"day 14/plots/{sec_range[0]}-{sec_range[1]}-positions.png")
     plt.close()
 
+def plot_robots_exact(robots, i, folder):
+    new_positions = calculate_positions(robots, i)
+    x,y = zip(*new_positions)
+    plt.figure(figsize=(10,10))
+    plt.scatter(x,y)
+    plt.axis("off")
+    plt.title(f"{i} sec")
+    plt.savefig(f"day 14/{folder}/sec{i}-positions.png")
+    plt.close()
+
 
 #new_positions = calculate_positions(robots, 100)
 #robot_matrix(new_positions)
 #print(count_robots(new_positions))
 """
-for i in range(30, 101):
+for i in range(101, 301):
     sec_range = (1 + i*25, 26 + i*25)
-    plot_robots(robots, sec_range)
+    plot_robots(robots, sec_range)"""
 """
+security_levels = []
+for i in range(10001):
+    if i % 1000 == 0:
+        print(i)
+    new_positions = calculate_positions(robots, i)
+    security_levels.append(count_robots(new_positions))
+print("Average security level:", sum(security_levels)/len(security_levels))"""
+# Average security level: 221748592
+
+avg_sec_level = 221748592
+for i in range(10001):
+    if i % 1000 == 0:
+        print(i)
+    new_positions = calculate_positions(robots, i)
+    sec_level = count_robots(new_positions)
+    if sec_level < 0.9*avg_sec_level:
+        plot_robots_exact(robots,i,"outlier_plots")
+
+
 
 #part 1: 63011520 INCORRECT
 #part 1: 221604840 INCORRECT (too low)
 #part 1: 225810288 CORRECT
 
 #part 2: 57 INCORRECT 
+#part 2: 6752 looks just like a christmas tree
