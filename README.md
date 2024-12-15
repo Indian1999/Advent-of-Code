@@ -23,4 +23,5 @@ Still in the works, I was able to figure out part 1 quickly, but the second part
 
 Day 14:
 Part 1 was pretty simple, altough I had some trouble figuring out a bug (basicly an index was 1 off). Part 2 was really interesting, at first I tought "how the hell am I supposed to know how the christmas tree should look like", but I started plotting the robots' positions, first on a tiny 5*5 plot, but that didn't lead to any result, then I tought maybe trying larger plots would help, but I would have had to generate thousands of images so I looked for a better way. I figured out what the average security score for a set of positions were, and if at any given second the security score was off, I plotted those positions. With this approch, the solution was found quickly. Overall, this was a fun challange, had me think differently and I also got some much needed experience using pyplot.
+
 ![part-2-solution](https://github.com/user-attachments/assets/6be92b27-fb10-4ec0-a462-5713476d027f)
