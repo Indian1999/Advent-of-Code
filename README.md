@@ -1,4 +1,4 @@
-#Advent of Code 2024 journal
+# Advent of Code 2024 journal
 
 **Day 1:**
 Not much to say, was an easy routine task.
