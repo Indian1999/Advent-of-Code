@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 from_file = True
 robots = [
     ((0,4), (3,-3)),
@@ -68,10 +69,30 @@ def robot_matrix(robots):
     for row in robot_matrix:
         print(row)
     
-new_positions = calculate_positions(robots, 100)
+def plot_robots(robots, sec_range=(1, 26)):
+    fig, axes = plt.subplots(5,5, figsize=(15,15))
+    for i in range(sec_range[0],sec_range[1]):
+        index = (i - 1) % 25
+        new_positions = calculate_positions(robots, i)
+        x,y = zip(*new_positions)
+        axes[index//5,index%5].scatter(x,y)
+        axes[index//5,index%5].set_title(f"{i} sec")
+        axes[index//5,index%5].axis("off")
+    plt.savefig(f"day 14/plots/{sec_range[0]}-{sec_range[1]}-positions.png")
+    plt.close()
+
+
+#new_positions = calculate_positions(robots, 100)
 #robot_matrix(new_positions)
-print(count_robots(new_positions))
+#print(count_robots(new_positions))
+"""
+for i in range(30, 101):
+    sec_range = (1 + i*25, 26 + i*25)
+    plot_robots(robots, sec_range)
+"""
 
 #part 1: 63011520 INCORRECT
 #part 1: 221604840 INCORRECT (too low)
 #part 1: 225810288 CORRECT
+
+#part 2: 57 INCORRECT 
