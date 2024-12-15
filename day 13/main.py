@@ -26,12 +26,13 @@ solutions = []
 for item in machines:
     lp = pulp.LpProblem("KeyPresses", pulp.LpMinimize)
 
-    x1 = pulp.LpVariable("x1", lowBound=0, cat="Integer")
-    x2 = pulp.LpVariable("x2", lowBound=0, cat="Integer")
+    x1 = pulp.LpVariable("x1", lowBound=0, cat="Float")
+    x2 = pulp.LpVariable("x2", lowBound=0, cat="Float")
 
     lp += x1 + 3*x2
-    lp += item[0][0]*x1 + item[1][0]*x2 == item[2][0] + 10000000000000 # + for part2
-    lp += item[0][1]*x1 + item[1][1]*x2 == item[2][1] + 10000000000000 # + for aprt2
+    lp += x1.isInteger() and x2.isInteger()
+    lp += item[0][0]*x1 + item[1][0]*x2 == item[2][0]
+    lp += item[0][1]*x1 + item[1][1]*x2 == item[2][1]
 
     solver = pulp.PULP_CBC_CMD(msg=False)
     status = lp.solve(solver)
@@ -55,4 +56,5 @@ print(calculate_tokens(solutions))
 
 
 #part 1: 29201 CORRECT
-#part 2: 2769724810000 INCORRECT (too low)
+#part 2: 2769724810000   INCORRECT (too low)
+#part 2: 160121566695540 INCORRECT (too high)
