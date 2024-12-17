@@ -177,11 +177,24 @@ def print_distance_cost_matrix():
     print()
 
 def find_cheapest_neighbour(pos):
+    global distance_cost_matrix
     x,y = pos
     right = cost_matrix[x][y+1]
     left  = cost_matrix[x][y-1]
     up    = cost_matrix[x-1][y]
     down  = cost_matrix[x+1][y]
+    right_distance = distance_cost_matrix[x][y+1]
+    left_distance  = distance_cost_matrix[x][y-1]
+    up_distance    = distance_cost_matrix[x-1][y]
+    down_distance  = distance_cost_matrix[x+1][y]
+    if right_distance != inf:
+        right += right_distance
+    if left_distance != inf:
+        left += left_distance
+    if up_distance != inf:
+        up += up_distance
+    if down_distance != inf:
+        down += down_distance
     dire = ">"
     if left <= up and left <= down and left < right and left != inf:
         dire = "<"
@@ -196,12 +209,7 @@ def find_cheapest_neighbour(pos):
     return dire
 
 def ghg(pos, stack):
-    global finish_pos, cost_matrix
-    #print(pos)
-    #print(cost_matrix[pos[0]][pos[1]])
-    #print(stack)
-    #input()
-    #print_cost_matrix()
+    global finish_pos, cost_matrix, distance_cost_matrix
     stack.append(pos)
     if pos == finish_pos:
         return 0
@@ -224,14 +232,14 @@ def ghg(pos, stack):
 
 
 def go_horsey_go():
-    global maze, cost_matrix
+    global maze, cost_matrix, distance_cost_matrix
     x,y = get_start_pos()
     turn_cost = cost_matrix[x][y]
     stack = [(x,y)]
     distance = ghg((x,y), stack)
     print(distance + turn_cost)
 
-read_maze(True, 2)
+read_maze(False, 1)
 finish_pos = get_finish_pos()
 
 make_turn_cost_matrix()
@@ -242,3 +250,4 @@ go_horsey_go()
 
 #part1: 130816 INCORRECT (too high)
 #part1: 130608 INCORRECT (too high)
+#part1: 130556 INCORRECT (too high)
