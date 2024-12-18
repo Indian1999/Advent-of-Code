@@ -3,6 +3,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 sys.setrecursionlimit(30000)
+"""
+####################################################################################
+#                                                                                  #
+#      THIS IS A FAILED ATTEMP! THIS SCRIPT DOES NOT FIND A CORRECT SOLUTION!      #
+#                                                                                  #
+####################################################################################
+"""
 
 maze = []
 cost_matrix = []
@@ -145,7 +152,7 @@ def make_turn_cost_matrix():
     f(finish, "<")
     f(finish, "v")
     x,y = get_start_pos()
-    dire = find_cheapest_neighbour((x,y))
+    dire = find_cheapest_turn_neighbour((x,y))
     if dire == ">":
         cost_matrix[x][y] = cost_matrix[x][y+1]
     if dire == "<":
@@ -154,7 +161,7 @@ def make_turn_cost_matrix():
         cost_matrix[x][y] = cost_matrix[x+1][y] + 1000
     if dire == "^":
         cost_matrix[x][y] = cost_matrix[x-1][y] + 1000
-
+"""
 def fd(pos):
     global maze, distance_cost_matrix
     x, y = pos
@@ -174,7 +181,27 @@ def fd(pos):
         if distance_cost_matrix[x+1][y] > distance_cost_matrix[x][y] + 1:
             distance_cost_matrix[x+1][y] = distance_cost_matrix[x][y] + 1
             fd((x+1,y))
-
+"""
+def fd(pos):
+    global maze, distance_cost_matrix
+    print(pos)
+    x, y = pos
+    if maze[x][y-1] == "." or maze[x][y-1]:
+        if distance_cost_matrix[x][y-1] > distance_cost_matrix[x][y] + 1:
+            distance_cost_matrix[x][y-1] = distance_cost_matrix[x][y] + 1
+            fd((x,y-1))
+    if maze[x][y+1] == "." or maze[x][y+1]:
+        if distance_cost_matrix[x][y+1] > distance_cost_matrix[x][y] + 1:
+            distance_cost_matrix[x][y+1] = distance_cost_matrix[x][y] + 1
+            fd((x,y+1))
+    if maze[x-1][y] == "." or maze[x-1][y]:
+        if distance_cost_matrix[x-1][y] > distance_cost_matrix[x][y] + 1:
+            distance_cost_matrix[x-1][y] = distance_cost_matrix[x][y] + 1
+            fd((x-1,y))
+    if maze[x+1][y] == "." or maze[x+1][y]:
+        if distance_cost_matrix[x+1][y] > distance_cost_matrix[x][y] + 1:
+            distance_cost_matrix[x+1][y] = distance_cost_matrix[x][y] + 1
+            fd((x+1,y))
 
 def make_distance_cost_matrix():
     global distance_cost_matrix, cost_matrix
@@ -211,22 +238,30 @@ def print_distance_cost_matrix():
 def find_cheapest_neighbour(pos):
     global distance_cost_matrix
     x,y = pos
+    right = distance_cost_matrix[x][y+1]
+    left  = distance_cost_matrix[x][y-1]
+    up    = distance_cost_matrix[x-1][y]
+    down  = distance_cost_matrix[x+1][y]
+    dire = ">"
+    if left <= up and left <= down and left < right and left != inf:
+        dire = "<"
+    elif up <= down and up <= left and up < right and up != inf:
+        dire = "^"
+    elif down <= up and down <= left and down < right and down != inf:
+        dire = "v"
+    elif right != inf:
+        dire = ">"
+    else:
+        raise Exception("DeadEndError")
+    return dire
+
+def find_cheapest_turn_neighbour(pos):
+    global distance_cost_matrix
+    x,y = pos
     right = cost_matrix[x][y+1]
     left  = cost_matrix[x][y-1]
     up    = cost_matrix[x-1][y]
     down  = cost_matrix[x+1][y]
-    right_distance = distance_cost_matrix[x][y+1]
-    left_distance  = distance_cost_matrix[x][y-1]
-    up_distance    = distance_cost_matrix[x-1][y]
-    down_distance  = distance_cost_matrix[x+1][y]
-    if right_distance != inf:
-        right += right_distance
-    if left_distance != inf:
-        left += left_distance
-    if up_distance != inf:
-        up += up_distance
-    if down_distance != inf:
-        down += down_distance
     dire = ">"
     if left <= up and left <= down and left < right and left != inf:
         dire = "<"
@@ -242,6 +277,8 @@ def find_cheapest_neighbour(pos):
 
 def ghg(pos, stack):
     global finish_pos, cost_matrix, distance_cost_matrix, path_matrix
+    print(pos)
+    input()
     stack.append(pos)
     if pos == finish_pos:
         plot_stack(stack)
@@ -278,6 +315,11 @@ def plot_stack(stack):
     plt.gca().invert_yaxis()
     plt.savefig("day 16/my-maze-output.png")
 
+def plot_heatmap(matrix):
+    nparray = np.array(matrix)
+    plt.imshow(nparray, cmap="hot", interpolation="nearest")
+    plt.show()
+
 read_maze(True, 3)
 finish_pos = get_finish_pos()
 
@@ -285,7 +327,9 @@ make_turn_cost_matrix()
 #print_cost_matrix()
 make_distance_cost_matrix()
 #print_distance_cost_matrix()
-go_horsey_go()
+#go_horsey_go()
+start = get_start_pos()
+print(distance_cost_matrix[start[0]][start[1]])
 
 #part1: 130816 INCORRECT (too high)
 #part1: 130608 INCORRECT (too high)

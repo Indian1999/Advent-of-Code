@@ -28,3 +28,6 @@ Part 1 was pretty simple, altough I had some trouble figuring out a bug (basicly
 
 **Day 15:**
 This is my least favourite puzzle so far, it is mostly grunt work, also I made it hair pulling for myself by accidentally using the wrong input for testing, took me half an hour to figure that one out, after that is was smooth sailing with some bugfixes. But with this one, debugging was pretty annoying, lot of indexing, easy to get them wrong in a few places.
+
+**Day 16:**
+Holy moly. I spent 6 hours on the 16th on just the first part alone, I did not manage to complete it, I stayed up until 8 a.m. because I was trying to solve the problem. My first try was with a recursive algorithm which got way too convoluted way too quickly. At some point I decided to go to sleep and when I woke up, it just came to me: Do not overcomplicate it you moron! Part 2 in progress...
