@@ -1,3 +1,6 @@
+import re
+
+
 def parse_instruction(instruction: str):
     start = instruction.find("mul(")
     instruction = instruction[start+4:]
@@ -62,22 +65,59 @@ def handle_dos_and_donts_3(instruction:str)->str:
             do_index = ins_split[i].find("do()")
             handled_instruction += ins_split[i][do_index+4:]
     return handled_instruction
-instruction = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undon't()do()()?mul(8,5))"
+
+def regex_parse(instruction):
+    matches = re.findall(r"mul\(\d+,\d+\)", instruction)
+    total = 0
+    for match in matches:
+        nums = match[4:-1]
+        nums = nums.split(",")
+        a = int(nums[0])
+        b = int(nums[1])
+        total += a*b
+    return total
+
+def regex_dos_and_donts(instruction):
+    regex = r"don't\(\).*?do\(\)"
+    instruction_split = re.split(regex, instruction)
+    new_instruction = ""
+    for item in instruction_split:
+        new_instruction += item
+    return new_instruction
+
+def regex_cleanup(instruction):
+    return "".join(re.findall(r"do\(\)|don't\(\)|mul\(\d+,\d+\)", instruction))
+
+
+
+instruction = ""
 with open("day 3/input.txt", "r", encoding="utf-8") as f:
     lines = f.readlines()
     for line in lines:
-        instruction = instruction + line
+        instruction = instruction + line.strip()
+
+#instruction = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undon't()do()()?mul(8,5))"
 
 #print(instruction)
-instruction = handle_dos_and_donts_3(instruction)
+#instruction = handle_dos_and_donts_3(instruction)
 #print(instruction)
-print(parse_instruction(instruction))
+#print(parse_instruction(instruction))
+instruction += "do()"
+instruction = regex_cleanup(instruction)
+print(instruction)
+instruction = regex_dos_and_donts(instruction)
+print()
+print(instruction)
+print(regex_parse(instruction))
 
 #part2: (with handle_dos_and_donts)               83276487 INCORRECT (too high)
 #part2: (with handle_dos_and_donts_2)             82733731 INCORRECT (too high)
 #part2: (with handle_dos_and_donts_2 and cleanup) 82911076 INCORRECT (too high)
 #part2: (with handle_dos_and_donts and cleanup)   83453832 INCORRECT (too high)
 #part2: (handle_dos_and_donts_3 results the same as the 2)
+
+#82733683
+
 
 """
 Idea for tomorrow:

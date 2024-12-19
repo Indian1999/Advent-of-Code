@@ -144,7 +144,7 @@ for triad0 in triads:
 
 print(solution)
 print(int(solution,2))
-"""
+
 start = "111000010110100010100011000110110" + "0"*15
 start = int(start,2)
 for i in range(start, start + 2**16):
@@ -155,7 +155,7 @@ for i in range(start, start + 2**16):
     if output == instructions:
         print(i)
 
-
+"""
 """
 Nice try, the value of our searched value looks to be a 46-48 bit number
 i = 0
