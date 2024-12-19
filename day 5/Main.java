@@ -6,21 +6,56 @@ import java.util.List;
 
 public class Main
 {
-    // part1: 7307 CORRECT
+    // part 1: 7307 CORRECT
+    // part 2: 4713 CORRECT
     List<List<Page>> updates = new ArrayList<>();
     public static void main(String[] args)
     {
         Main obj = new Main();
         obj.readInput("day 5/input.txt");
+        obj.part1();
+        obj.part2();
+    }
+    void part1()
+    {
         int total = 0;
-        for (List<Page> update : obj.updates) 
+        for (List<Page> update : updates) 
         {
-            if (obj.isOrdered(update))
+            if (isOrdered(update))
             {
-                total += obj.getMiddlePageNum(update);
+                total += getMiddlePageNum(update);
             }
         }
-        System.out.println(total);
+        System.out.println("part 1: " + total);
+    }
+    void part2()
+    {
+        int total = 0;
+        for (List<Page> update : updates) 
+        {
+            if (!isOrdered(update))
+            {
+                orderUpdate(update);
+                total += getMiddlePageNum(update);
+            }
+        }
+        System.out.println("part 2: " + total);
+    }
+
+    void orderUpdate(List<Page> update)
+    {
+        for (int i = 0; i < update.size()-1; i++) 
+        {
+            for (int j = i+1; j < update.size(); j++) 
+            {
+                if (update.get(j).isSmaller(update.get(i)))
+                {
+                    Page temp = update.get(i);
+                    update.set(i, update.get(j));
+                    update.set(j, temp);
+                }
+            }
+        }
     }
 
     int getMiddlePageNum(List<Page> list)
