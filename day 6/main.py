@@ -88,8 +88,9 @@ def print_map():
 
 guard_pos = find_guard(map)
 while move_guard():
-    print_map()
-    input()
+    pass
+    #print_map()
+    #input()
 
 total = 0
 for i in range(len(map)):
