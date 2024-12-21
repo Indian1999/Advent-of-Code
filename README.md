@@ -7,6 +7,21 @@ Not much to say, was an easy routine task.
 First task was pretty straight forward, but things got a little complecated in the second. My initial idea did not take into account when the first level is wrong, but even after fixing this there was one scenario where a report was misslabeled, took me a while to figure it out, turn out sometimes the wrong level is the one that is before the currently checked one.
 The solution itself is not the best, probably not the best runtime.
 
+**Day 3:**
+ALWAYS check if you are using the correct input! I wasted so many hours on the part 2 of this task. I created 4 different solutions, neither of them did the job. After a while I realised it didn't provide the correct output because I screwed up at didn't use the proper input... At least the screw up made me learn some regex.
+
+**Day 4:**
+Wordsearch. It was a pretty easy task, both parts, just needed some proper input handling and when it was done, it was smooth sailing.
+
+**Day 5:**
+I wanted to work with classes on this one so I decided to go for java instead of python. Since I worked with java it took some time to set up the infrastructure for the task, but when it was done, both parts took like 2 minutes. Just checking if a list is ordered and ordering it if it is not.
+
+**Day 6:**
+A 2D puzzle, figuring out a guard's patrol path. Part 1 was pretty easy, just simulated the guard's path and got the result. Part 2 on the other hand... I still have no idea how to tackle it so I will leave this for another day since I relly need to catch up on the other days. (Did this task on 20th of Dec)
+
+**Day 7:**
+This one took me a bit, the first part just needed some string handling and after I got that one figured out I just solved it with the evaluate function. The second part is not the best solution, actually it was easier without the evaluate function, I wrote my own version of it so it better fit the task, but the algorithm is REALLY slow, it had a 10+ minute runtime, but it provided the correct answer so I'll take it. 
+
 **Day 10:**
 This was a nice challange, needed to think it through to get a fairly easy solution, altough it helped that I accidentally solved part2 while trying to solve part1 :D
 
