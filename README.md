@@ -8,7 +8,7 @@ First task was pretty straight forward, but things got a little complecated in t
 The solution itself is not the best, probably not the best runtime.
 
 **Day 3:**
-ALWAYS check if you are using the correct input! I wasted so many hours on the part 2 of this task. I created 4 different solutions, neither of them did the job. After a while I realised it didn't provide the correct output because I screwed up at didn't use the proper input... At least the screw up made me learn some regex.
+ALWAYS check if you are using the correct input! I wasted so many hours on the part 2 of this task. I created 4 different solutions, neither of them did the job. After a while I realised it didn't provide the correct output because I screwed up and didn't use the proper input... At least the screw up made me learn some regex.
 
 **Day 4:**
 Wordsearch. It was a pretty easy task, both parts, just needed some proper input handling and when it was done, it was smooth sailing.
