@@ -20,7 +20,10 @@ I wanted to work with classes on this one so I decided to go for java instead of
 A 2D puzzle, figuring out a guard's patrol path. Part 1 was pretty easy, just simulated the guard's path and got the result. Part 2 on the other hand... I still have no idea how to tackle it so I will leave this for another day since I relly need to catch up on the other days. (Did this task on 20th of Dec)
 
 **Day 7:**
-This one took me a bit, the first part just needed some string handling and after I got that one figured out I just solved it with the evaluate function. The second part is not the best solution, actually it was easier without the evaluate function, I wrote my own version of it so it better fit the task, but the algorithm is REALLY slow, it had a 10+ minute runtime, but it provided the correct answer so I'll take it. 
+This one took me a bit, the first part just needed some string handling and after I got that one figured out I just solved it with the evaluate function. The second part is not the best solution, actually it was easier without the evaluate function, I wrote my own version of it so it better fit the task, but the algorithm is REALLY slow, it had a 10+ minute runtime, but it provided the correct answer so I'll take it.
+
+**Day 8:**
+20 minute task for both parts, just some simple operations with vectors.
 
 **Day 10:**
 This was a nice challange, needed to think it through to get a fairly easy solution, altough it helped that I accidentally solved part2 while trying to solve part1 :D
