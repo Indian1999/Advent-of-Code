@@ -49,3 +49,4 @@ This is my least favourite puzzle so far, it is mostly grunt work, also I made i
 
 **Day 16:**
 Holy moly. I spent 6 hours on the 16th on just the first part alone, I did not manage to complete it, I stayed up until 8 a.m. because I was trying to solve the problem. My first try was with a recursive algorithm which got way too convoluted way too quickly. At some point I decided to go to sleep and when I woke up, it just came to me: Do not overcomplicate it you moron! Part 2 in progress...
+
