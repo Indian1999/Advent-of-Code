@@ -17,7 +17,7 @@ while "." in memory[prev_empty:]:
         memory[prev_empty] = memory.pop()
     except:
         pass
-    # for some reason otherwise it throw Index Out of Bounds
+    # for some reason otherwise it throws Index Out of Bounds
 
 total = 0
 for i in range(len(memory)):
